@@ -1,0 +1,70 @@
+!DOCTYPE html >
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+</head>
+
+<body>
+    <h1>5 object / array access challenges 😇</h1>
+    <h2>(read the comments in the script tag)</h2>
+</body>
+<script>
+    const user = {
+        name: { first: "bob", last: "bobberson" },
+        email: "bob@gmail.com",
+        age: 123
+    };
+
+    // single object
+
+    // CHALLENGE 1
+    // CONSOLE.LOG THE email of the user object above
+    console.log(user.email);
+
+    // CHALLENGE 2
+    // CONSOLE.LOG THE last name of the user object above
+    console.log(user.name.last);
+    ////////////////
+    // array of objects
+    ////////////////
+
+    const users = [
+        {
+            name: { first: "bob", last: "bobberson" },
+            email: "bob@gmail.com",
+            age: 123
+        },
+        {
+            name: { first: "bob1", last: "bobberson1" },
+            email: "bob1@gmail.com",
+            age: 123
+        },
+        {
+            name: { first: "bob2", last: "bobberson2" },
+            email: "bob2@gmail.com",
+            age: 123
+        },
+        {
+            name: { first: "bob3", last: "bobberson3" },
+            email: "bob3@gmail.com",
+            age: 123
+        }
+    ];
+
+    // CHALLENGE 3
+    // CONSOLE.LOG the email of the user with first name bob2
+    console.log(users[2].email);
+    // CHALLENGE 4
+    // CONSOLE.LOG the last name of the user with first name bob3
+    console.log(users[3].name.last);
+
+    // CHALLENGE 5
+    // CONSOLE.LOG the number of users
+    console.log(users.length);
+</script>
+
+</html>
