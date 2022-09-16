@@ -4,19 +4,21 @@ console.log("yep you connected js")
 //------------------------------------------
 
 const myList = [
-    { pending: false, text: "apple", date: new Date },
-    { pending: false, text: "banana", date: new Date },
-    { pending: false, text: "coffee", date: new Date }
+    { inProgress: true, text: "apple", date: new Date() },
+    { inProgress: true, text: "banana", date: new Date() },
+    { inProgress: true, text: "coffee", date: new Date() }
 ];
+let editingIndex = 2;
+
+//----------DOM ---- webpage----shortcuts----------/
 const inputEl = document.querySelector('#user-text-input-element')
-console.log(inputEl)
 const targetEl = document.querySelector("#target")
 const pendingToggleEl = document.querySelector("#pending-toggle")
 
 //   LISTEN / PAY ATTENTION / OBSERVER / WAIT
 // DOM NODE
 // addEventListener(event type, function  ) <------- signature
-
+//--------------------CREATE------------------------//
 inputEl.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         //     console.log("key is enter!")
@@ -31,43 +33,38 @@ inputEl.addEventListener("keyup", function (event) {
         render()
     }
 })
-
-//------------CREATE-------------//
-
-
-myList.unshift();
-
-
 //------------READ------------//
 // create HTML, adding to the DOM (the page)
-
 function render() {
     // take data {myList}
     // turn into "html" strings
     // put into the dom
     // "PRINT"
-
+    //if showOnly inProgress, allow only inProgress: true items throught the fileter
     const myListAsHTML = myList
+        .filter(function (item) {
+            return showOnlyInProgress ? item.inProgress : true
+        })
         .map(function (item, i) {
             return `
             <li >
-        ${item.done}
-        ${item.text}
-        ${item.date.toLocaleDateString('en-Us', {
+                ${item.done}
+                ${item.inProgress}
+                ${item.date.toLocaleDateString('en-Us', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
             })}
-            <button onclick="check(${i})"><i class = 'fas fa-check'></i></button>
-        <button onclick="remove(${i})"><i class = 'fas fa-trash'></i></button>
+                <button onclick="check(${i})"><i class = 'fas fa-check'></i></button>
+                <button onclick="remove(${i})"><i class = 'fas fa-trash'></i></button>
      
-        </li>`})
+            </li>`})
         //    .reverse()
         //        .sort()
         .join("")
 
     targetEl.innerHTML = myListAsHTML
-    console.log(myListAsHTML);
+    //    console.log(myListAsHTML);
 }
 render()
 
@@ -89,7 +86,7 @@ function remove(i) {
 
 // filter out done
 // a new piece of state in our app
-let showOnlyPending = false;
+let showOnlyInProgress = false;
 pendingToggleEl.addEventListener('click', function (event) {
     showOnlyPending = !showOnlyPending
     pendingToggleEl.innerText = showOnlyPending ? "remove filter" : "show only pending"
